@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Аутентификация</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<header>
+    <h1 class='logo'>Online store</h1>
+        <nav>
+    <button>
+        <a class="nav-card" href="/authentication/registration">Регистрация</a>
+    </button>
+        </nav>
+</header>
+<body>
+<h2>Аутентификация</h2>
+<div class="login">
+    <div class="login-item">
+<h3>Вход</h3>
+<form method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <label for="username">Введите логин: </label><br>
+    <input type="text" placeholder="Введите ваш логин" name="username" id="username">
+    <br>
+    <label for="password">Введите пароль: </label>
+    <br>
+    <input type="password" placeholder="Введите ваш пароль" name="password" id="password">
+    <button>
+    <input type="submit" value="Войти">
+    </button>
+    <div th:if="${param.error}" style="color: red">
+        Неправильный логин или пароль
+    </div>
+</form>
+</div>
+</div>
+<br>
+</body>
+<footer>
+    <div class='logo'>Online store</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum erat, a hendrerit lacus. Sed sit amet tellus ex. In dictum, nibh et finibus condimentum, sapien dolor consequat felis, et faucibus enim augue faucibus nibh
+        <br />
+        <br />
+        Nam non aliquam nibh. Pellentesque ullamcorper rutrum orci ut scelerisque. Integer consequat eget lacus gravida iaculis. Morbi ac turpis non elit vulputate maximus at ac elit. In porta massa eget eros sagittis, nec tincidunt felis ullamcorper.
+    </p>
+</footer>
+</html>

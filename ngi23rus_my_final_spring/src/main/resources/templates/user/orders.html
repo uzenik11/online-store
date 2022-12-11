@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<header>
+    <h1 class='logo'>Online store</h1>
+    <nav>
+        <form method="get" th:action="@{/cart}">
+            <input type="submit" value="Корзина">
+        </form>
+        <form method="get" th:action="@{/orders}">
+            <input type="submit" value="История заказов">
+        </form>
+        <form method="post" th:action="@{/logout}">
+            <input type="submit" value="Выйти из личного кабинета">
+        </form>
+    </nav>
+</header>
+<body>
+<h2>История заказов</h2>
+<div id="products-card">
+<div id="products-item-card" th:each="order : ${orders}">
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}">
+    <p class="is-zak" th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+    <p class="is-zak" th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p class="is-zak" th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p class="is-zak" th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p class="zena" th:text="'Статус: ' + ${order.getStatus()}">
+</div>
+</div>
+</body>
+<footer>
+    <div class='logo'>Online store</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum erat, a hendrerit lacus. Sed sit amet tellus ex. In dictum, nibh et finibus condimentum, sapien dolor consequat felis, et faucibus enim augue faucibus nibh
+        <br />
+        <br />
+        Nam non aliquam nibh. Pellentesque ullamcorper rutrum orci ut scelerisque. Integer consequat eget lacus gravida iaculis. Morbi ac turpis non elit vulputate maximus at ac elit. In porta massa eget eros sagittis, nec tincidunt felis ullamcorper.
+    </p>
+</footer>
+</html>

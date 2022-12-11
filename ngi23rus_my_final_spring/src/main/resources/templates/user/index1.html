@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<header>
+    <h1 class='logo'>Online store</h1>
+    <nav>
+        <form method="get" th:action="@{/cart}">
+            <input type="submit" value="Корзина">
+        </form>
+        <form method="get" th:action="@{/orders}">
+            <input type="submit" value="История заказов">
+        </form>
+        <form method="post" th:action="@{/logout}">
+            <input type="submit" value="Выйти из личного кабинета">
+        </form>
+    </nav>
+</header>
+<body>
+<div class="h2">
+    <h2>Главная страница магазина</h2>
+</div>
+<div class="form-item">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum erat, a hendrerit lacus. Sed sit amet tellus ex. In dictum, nibh et finibus condimentum, sapien dolor consequat felis, et faucibus enim augue faucibus nibh
+        <br />
+        <br />
+        Nam non aliquam nibh. Pellentesque ullamcorper rutrum orci ut scelerisque. Integer consequat eget lacus gravida iaculis. Morbi ac turpis non elit vulputate maximus at ac elit. In porta massa eget eros sagittis, nec tincidunt felis ullamcorper.
+    </p>
+    <form th:method="POST" th:action="@{/product/search}">
+        <fieldset>
+            <legend>Выберите параметр для сортировки: </legend>
+            <br>
+            <label for="search">Поиск по наименованию</label>
+            <input name="search" id="search">
+            <br>
+            <p>Цена, ₽</p>
+            <label for="ot">От</label>
+            <input type="text" name="ot" id="ot">
+            <label for="do">До</label>
+            <input type="text" name="do" id="do">
+            <br>
+            <br>
+            <div>
+                <label for="ascending_price">Отсортировать по возрастанию цены</label>
+                <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+                <br>
+                <br>
+                <label for="descending_price">Отсортировать по убыванию цены</label>
+                <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+                <p>Категория товаров: </p>
+                <label for="furniture">Продукты</label>
+                <input type="radio" id="furniture" name="contact" value="furniture">
+                <label for="appliances">Бытовая техника</label>
+                <input type="radio" id="appliances" name="contact" value="appliances">
+                <label for="clothes">Электроника</label>
+                <input type="radio" id="clothes" name="contact" value="clothes">
+                <br>
+                <br>
+                <input type="submit" value="Найти">
+            </div>
+        </fieldset>
+        <br>
+    </form>
+</div>
+<h2>Доступные товары: </h2>
+<div class="products-section">
+    <div class="products">
+        <div class="products-item" th:each="product : ${products}">
+            <img class="product-img" th:src="'/img/' + ${product.imageList[0].getFileName()}">
+            <br>
+            <a class="nav-item" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+            <p class="zena" th:text="'Цена: ' + ${product.getPrice()}"></p>
+            <button>
+                <a class="nav-card" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    <div class='logo'>Online store</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum erat, a hendrerit lacus. Sed sit amet tellus ex. In dictum, nibh et finibus condimentum, sapien dolor consequat felis, et faucibus enim augue faucibus nibh
+        <br />
+        <br />
+        Nam non aliquam nibh. Pellentesque ullamcorper rutrum orci ut scelerisque. Integer consequat eget lacus gravida iaculis. Morbi ac turpis non elit vulputate maximus at ac elit. In porta massa eget eros sagittis, nec tincidunt felis ullamcorper.
+    </p>
+</footer>
+</html>

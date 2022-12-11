@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о товаре</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<header>
+    <h1 class='logo'>Online store</h1>
+    <nav>
+        <form method="get" th:action="@{/cart}">
+            <input type="submit" value="Корзина">
+        </form>
+        <form method="get" th:action="@{/orders}">
+            <input type="submit" value="История заказов">
+        </form>
+        <form method="post" th:action="@{/logout}">
+            <input type="submit" value="Выйти из личного кабинета">
+        </form>
+    </nav>
+</header>
+<body>
+<h2>Подробная информация о товаре</h2>
+<div id="products-section">
+    <div id="products">
+<div id="products-item">
+<p class="zena" th:text="'Наименование: ' + ${product.getTitle()}"></p>
+<p th:text="'Описание: ' + ${product.getDescription()}"></p>
+<p class="zena" th:text="'Цена: ' + ${product.getPrice()}"></p>
+<p class="zena" th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+<p class="zena" th:text="'Продавец: ' + ${product.getSeller()}"></p>
+<p class="zena" th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+</div>
+</div>
+</div>
+<div class="products-section">
+    <div class="products">
+<div class="products-item" th:each="img : ${product.getImageList()}">
+    <img class="product-img" th:src="'/img/' + ${img.getFileName()}">
+</div>
+    </div>
+</div>
+</body>
+<footer>
+    <div class='logo'>Online store</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum erat, a hendrerit lacus. Sed sit amet tellus ex. In dictum, nibh et finibus condimentum, sapien dolor consequat felis, et faucibus enim augue faucibus nibh
+        <br />
+        <br />
+        Nam non aliquam nibh. Pellentesque ullamcorper rutrum orci ut scelerisque. Integer consequat eget lacus gravida iaculis. Morbi ac turpis non elit vulputate maximus at ac elit. In porta massa eget eros sagittis, nec tincidunt felis ullamcorper.
+    </p>
+</footer>
+</html>
